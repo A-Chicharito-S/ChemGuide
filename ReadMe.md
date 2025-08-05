@@ -5,6 +5,14 @@
 ![cover](figures/main.png)
 ![cover](figures/ICLR_poster.png)
 
+### Table of Contents
+- [ChemGuide](#chemguide)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Setup](#setup)
+  - [Experiment](#experiment)
+  - [Citation](#citation)
+
 ### Overview
 
 _Research Question_
@@ -24,12 +32,12 @@ _Conclusion_
 
 
 ### Setup
-- environment 
-  
+- environment
+
   - GeoLDM: please follow the instructions [[here]](https://github.com/MinkaiXu/GeoLDM) to set up the environment for [GeoLDM](https://github.com/MinkaiXu/GeoLDM)
   - xTB guidance: please follow the instructions [[here]](https://xtb-docs.readthedocs.io/en/latest/setup.html#setup) to set up xTB. Note that there are two ways of setting up xTB: xTB-python and xTB, please **don't** use xTB-python, use `Precompiled Binaries from GitHub` instead. To properly install xTB from binaries, please download xTB from Github ([[here]](https://github.com/grimme-lab/xtb/releases)). In this paper, we use version **6.6.1**.
-  - metric calculation: 
-    - in this work we use metric from GeoLDM [[here]](https://github.com/MinkaiXu/GeoLDM) and autodE [[here]](https://duartegroup.github.io/autodE/index.html). Note that autodE calls xTB to calculate metrics, so please have xTB already installed before using autodE. To speed up autodE, we modified their code to decrease I/O times, please use `autode` directory in our repo. 
+  - metric calculation:
+    - in this work we use metric from GeoLDM [[here]](https://github.com/MinkaiXu/GeoLDM) and autodE [[here]](https://duartegroup.github.io/autodE/index.html). Note that autodE calls xTB to calculate metrics, so please have xTB already installed before using autodE. To speed up autodE, we modified their code to decrease I/O times, please use `autode` directory in our repo.
     - to calculate the metric, please use the function in `calculate_metric.py` and adapt it to your project.
 
 - data
@@ -78,21 +86,21 @@ For testing purpose (i.e., fast generation), we set the `guidance_step=4` (in th
   - clean guidance (property) + ChemGuide (force) (variables: `guidance_step`, `num_samples`, `property`, `clf_scale_prop`)
   `python eval_sample_xtb.py --model_path='outputs/qm9_latent2' --guidance_step=4 --package='c_line' --num_samples=3 --every_n_step=1 --run_id='run0' --bilevel_opti --property='alpha' --recurrent_times=1 --clf_scale_force=0.0001 --clf_scale_prop=0.01 --bilevel_method='uni_guide'`
 - ChemGuide for property (variables: `model_path`, `guidance_step`, `clf_scale`, `num_samples`, `property`, suggested: `every_n_step=1`)
-  
+
   `python eval_sample_xtb.py --model_path='outputs/qm9_latent2' --guidance_step=4 --clf_scale=0.01 --package='c_line_prop' --num_samples=3 --every_n_step=1 --run_id='run0' --property='alpha'`
 - evolution algorithm (variables: `model_path`, `num_samples`, `num_beams`, `check_variants_interval`, suggested: `guidance_step=400`, `clf_scale=0.0001`, `every_n_step=1`)
-  
+
   `python eval_sample_xtb.py --model_path='outputs/qm9_latent2' --guidance_step=400 --clf_scale=0.0001 --package='c_line_evo' --num_samples=3 --every_n_step=1 --run_id='run0' --use_evolution --num_beams=3 --check_variants_interval=20`
 
 ### Citation
-If you find our work interesting / useful, please consider citing our paper, thank you for your interest in our work!
+If you find our work interesting / useful, please consider citing our paper.
 ```
-@inproceedings{
-shen2025chemistryinspired,
-title={Chemistry-Inspired Diffusion with Non-Differentiable Guidance},
-author={Yuchen Shen and Chenhao Zhang and Sijie Fu and Chenghui Zhou and Newell Washburn and Barnabas Poczos},
-booktitle={The Thirteenth International Conference on Learning Representations},
-year={2025},
-url={https://openreview.net/forum?id=4dAgG8ma3B}
+@inproceedings{shen_chemistry-inspired_2025,
+  title = {Chemistry-Inspired Diffusion with Non-Differentiable Guidance},
+  url = {https://openreview.net/forum?id=4dAgG8ma3B},
+  eventtitle = {The Thirteenth International Conference on Learning Representations},
+  author = {Shen, Yuchen and Zhang, Chenhao and Fu, Sijie and Zhou, Chenghui and Washburn, Newell and Poczos, Barnabas},
+  date = {2025-01-22},
+  langid = {english},
 }
 ```
